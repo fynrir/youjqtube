@@ -1,0 +1,20 @@
+{
+    "name": "fynrir/youjqtube",    
+    "type": "library",
+    "description": "Create moveable/resizeable youtube player in PHP with this package!",
+    "keywords": ["php", "html", "school-assignment", "jQuery"],
+    "homepage": "http://www.theuselessweb.com/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "fynrir",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "autoload": {
+        "psr-4": { "fynrir\\": "src/" }
+    }
+}
