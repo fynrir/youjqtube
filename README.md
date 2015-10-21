@@ -29,10 +29,10 @@ You should note that composer will be installed in your project directory.
 If you got several projects and don't wish to install composer several times for each project folder, follow this link and read up
 more about installing composer: https://getcomposer.org/doc/00-intro.md#using-composer
 2. Move to your framework folder or the folder where you are working on your website. 
-3. Run this command while your terminal is in the specified folder (rightclick inside your folder and action>Open in Terminal):
-
-***curl -sS https://getcomposer.org/installer | php***
-
+3. Run this command while your terminal is in the specified folder (rightclick inside your folder and Actions>Open in Terminal):
+```
+curl -sS https://getcomposer.org/installer | php
+```
 4. You will need a composer.json file in the same folder where you installed
 
 
