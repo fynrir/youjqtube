@@ -111,10 +111,7 @@ EOD;
         $this->origin_ = $origin
     	$this->youtubeurlID_ = $youtubeid;
     	$this->options_ = $options;
-
-
-
-    	return $this;
+        return $this;
     }
 
     public function getHTML() {

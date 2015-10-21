@@ -69,11 +69,9 @@ Here's the commands for installing the package.
 The quickest way to test and see if the package was installed correctly is this:
 
 In your index.php or similar, place this code somewhere:
-
 $youtube = new \fynrir\youJQtube\youJQtube();
 
 And then do this:
-
 echo $youtube->getHTML();
 
 
