@@ -12,5 +12,29 @@ div's on the webpage that contains a iframe with the Youtube media player implem
 The two main features of this is it's jQuery part. Which enables you to resize the 
 div and in essence the Youtube player in it. And to move the div around on the webpage.
 
-***Methods and detailed description of how to use them***
+Backup your project folder in the case that everything might crash and burn.
+
+SOFTWARE IS PROVIDED AS-IS, I DO NOT GUARANTEE YOUR PROJECTS SAFETY.
+THIS IS THE FIRST TIME I DO THIS OKAY!
+
+***How to install youJQtube***
+
+youJQtube is intended to be used with Packagist and installed with composer.
+It also requires autoloading.
+
+As such that is the way we will install this package.
+
+1. Ensure that you have composer installed. If you do not, here's how to install it using LinuxMint KDE as an example.
+You should note that composer will be installed in your project directory.
+If you got several projects and don't wish to install composer several times for each project folder, follow this link and read up
+more about installing composer: https://getcomposer.org/doc/00-intro.md#using-composer
+2. Move to your framework folder or the folder where you are working on your website. 
+3. Run this command while your terminal is in the specified folder (rightclick inside your folder and action>Open in Terminal):
+
+***curl -sS https://getcomposer.org/installer | php***
+
+4. You will need a composer.json file in the same folder where you installed
+
+
+
 

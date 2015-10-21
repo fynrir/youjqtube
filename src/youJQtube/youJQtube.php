@@ -27,8 +27,8 @@ class youJQtube implements \ArrayAccess
 
 	$youtubeurlID_; //The extracted ID from the youtube url.
 	$options_; 		//The options.
-	$origin_;       //It's extremly important that you change the MYDOMAIN text to your full domain name and page where the player is to appear on.
-                    //If you use a frontcontroller. It should be enough to just do it on the frontcontroller.
+	$origin_;       //It's extremly important that you assign $origin_; a proper domain. OR the path to where the player will appear.
+                    //If you use fontcontrollers/frameworks etc. Then it should be enough to get the path for the froncontroller.
 			 		//Failure to do so can lead to malicious javascript hackers taking control of the youtube media player.
 				    //Example: http://example.com or https://example.com or https://example.com/frontcontroller.php
                     //If you have https, USE IT! NO EXCUSES!!!
@@ -51,13 +51,13 @@ class youJQtube implements \ArrayAccess
      * If you call this class without defining anything (URL and options), a default "nature" movie will be displayed to 
      * test if resize and moving works.
      *
-     * See the accompanying README.md for Versions, and more details readin regarding what each method does!
+     * See the accompanying README.md for Versions, and more details regarding what each method does!
      *
      * Code is released as public domain excluding the youtube iframe implentation and any code google owns.
      * see UNLINCENSE.md, and also read it's exception section so we are clear on what is correct.
      *
      */
-    public function __construct($youtubeurl = '', $options = [])
+    public function __construct($youtubeurl = '', $options = [], $origin)
     {
     	//If the $youtubeurl is empty, assign a default URL for testing this package and it's full extent of
     	//resizeable and moveability.
@@ -90,11 +90,25 @@ EOD;
             die($Message);
         }
 
-		$this->create($youtubeid, $options);
+		$this->create($youtubeid, $options, $origin);
     }
 
-    public function create($youtubeid, $options) {
+    public function create($youtubeid, $options, $origin) {
 
+        if (empty($origin)) {
+            $Message = <<<EOD
+<span style='font-size: 60px; font-color: red;'>Security Alert!</span>
+<br><br>This page contains a youJQtube player that has not had a origin set on it!<br>
+This is wrong and you need to inform your web administrator of this error immediatly.<br>
+Not setting the origin is tantamount to unlocking the door for the house robber<br>
+And letting him/her in freely.
+
+For webadministrator: Variable origin not set in class. Did you call the method correctly?
+EOD;
+            die($Message);
+        }
+
+        $this->origin_ = $origin
     	$this->youtubeurlID_ = $youtubeid;
     	$this->options_ = $options;
 
