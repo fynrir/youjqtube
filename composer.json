@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Create moveable/resizeable youtube player in PHP with this package!",
     "keywords": ["php", "html", "school-assignment", "jQuery"],
-    "homepage": "http://www.theuselessweb.com/",
+    "homepage": "https://github.com/fynrir/youjqtube",
     "license": "MIT",
     "authors": [
         {
