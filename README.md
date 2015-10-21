@@ -33,7 +33,22 @@ more about installing composer: https://getcomposer.org/doc/00-intro.md#using-co
 ```
 curl -sS https://getcomposer.org/installer | php
 ```
-4. You will need a composer.json file in the same folder where you installed
+
+You have now installed composer. Now you need a composer.json file with the bare minimum required to get going.
+Open a text-editor and paste this text into it:
+
+```
+{
+    "require": {
+        "php": ">=5.4",
+        "fynrir/youjqtube": "dev-master",
+    }
+}
+```
+
+Save this test in your project folder as composer.json.
+
+
 
 
 
