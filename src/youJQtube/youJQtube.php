@@ -104,7 +104,7 @@ EOD;
     }
 
     public function getHTML() {
-    //All isset checks will be done here. If they are not set. They will be given default values.
+    //All isset checks will be done here. If they are not set. They will be given default values (true for any booleans).
     //==============================================================================================================
     if (!isset($this->options_['min-width'])) {$this->options_['resize-able'] = 640;}
     if (!isset($this->options_['min-height'])) {$this->options_['resize-able'] = 360;}    
@@ -116,10 +116,10 @@ EOD;
     //==============================================================================================================
     // If checks for width and height to prevent possible errors. Decimals are not okay.
     //If any of them get's caught in the if checks. It will revent them to default values.
-    if (is_int($this->options_['min-width']) == false && !is_numeric($this->options_['min-width'])) {
+    if (is_int($this->options_['min-width']) == false || !is_numeric($this->options_['min-width'])) {
         $this->options_['min-width'] = 640;
     }
-    if (is_int($this->options_['min-height']) == false && !is_numeric($this->options_['min-height'])) {
+    if (is_int($this->options_['min-height']) == false || !is_numeric($this->options_['min-height'])) {
         $this->options_['min-height'] = 360;
     }
     
@@ -134,19 +134,24 @@ EOD;
 
     if (empty($this->options_['css-class']) || $this->options_['css-class'] == null) {
         $css_class = '';
-    } else {$css_class   = "class='".$this->options_['css-class']."'";}
+    } else 
+    {$css_class   = "class='".$this->options_['css-class']."'";}
+    $div_id = $this->options_['div-id'];
+    
+    if ($this->options_['move-able'] == true) {$move_able = ".draggable()";}
+    if ($this->options_['resize-able'] == true) {$resize_able = ".resizable()";}
+    if (!empty($move_able) || !empty($resize_able)) {
+        $scriptfinisher = ";";
+    }
 
-    $div_id      = $this->options_['div-id'];
-    if ($this->options_['move-able'] == true) {$move_able = }
-    $resize_able = $this->options_['resize-able'];
-    $move_able   = $this->options_['move-able'];
+    
 
 
     	$html_jquery = <<<EOD
 <script>
 $('#{$div_id}')
-    .draggable()
-    .resizable();
+    {$move_able}
+    {$resize_able}{$scriptfinisher}
 </script>
 <div id='{$div_id}' {$css_class} style='width:{$min_width}px; height:{$min_height}px'>
 <iframe id="player" type="text/html" width="{$min_width}" height="{$min_height}"
