@@ -20,7 +20,9 @@ THIS IS THE FIRST TIME I DO THIS OKAY!
 ***How to install youJQtube***
 
 youJQtube is intended to be used with Packagist and installed with composer.
-It also requires autoloading.
+It also comes with a autoloader. The installation instructions will not be going trough
+how to create an autoloader and such. Go read: http://php.net/manual/en/language.oop5.autoload.php
+And make a autoloader for your project.
 
 As such that is the way we will install this package.
 
@@ -41,12 +43,40 @@ Open a text-editor and paste this text into it:
 {
     "require": {
         "php": ">=5.4",
-        "fynrir/youjqtube": "dev-master",
+        "fynrir/youjqtube": "dev-master"
     }
 }
 ```
 
-Save this test in your project folder as composer.json.
+Save this text in your project folder as composer.json.
+
+By the way, before you continue. https://wutcode.files.wordpress.com/2013/12/31804326.jpg
+Can't argue with that!
+
+Before we continue. You really should read this: https://getcomposer.org/doc/01-basic-usage.md
+
+#If you use GIT!!!!
+
+***The composer team suggests you add vendor to your .gitignore***
+
+#Continuation
+
+Here's the commands for installing the package.
+
+
+***Basic Usage***
+
+The quickest way to test and see if the package was installed correctly is this:
+
+In your index.php or similar, place this code somewhere:
+
+$youtube = new \fynrir\youJQtube\youJQtube();
+
+And then do this:
+
+echo $youtube->getHTML();
+
+
 
 
 

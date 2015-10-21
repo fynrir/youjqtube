@@ -25,9 +25,9 @@ class youJQtube implements \ArrayAccess
 	 * Properties
 	 */
 
-	$youtubeurlID_; //The extracted ID from the youtube url.
-	$options_; 		//The options.
-	$origin_;       //It's extremly important that you assign $origin_; a proper domain. OR the path to where the player will appear.
+	public $youtubeurlID_; //The extracted ID from the youtube url.
+	public $options_; 		//The options.
+	public $origin_;       //It's extremly important that you assign $origin_; a proper domain. OR the path to where the player will appear.
                     //If you use fontcontrollers/frameworks etc. Then it should be enough to get the path for the froncontroller.
 			 		//Failure to do so can lead to malicious javascript hackers taking control of the youtube media player.
 				    //Example: http://example.com or https://example.com or https://example.com/frontcontroller.php
@@ -136,7 +136,6 @@ EOD;
     if (is_int($this->options_['min-height']) == false || !is_numeric($this->options_['min-height'])) {
         $this->options_['min-height'] = 360;
     }
-    
     
     //If checks to see if user forgot to set false or true on resize-able and move-able in $options array.
     //If so, revert to default which is true. 
