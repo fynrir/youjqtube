@@ -171,7 +171,7 @@ frameborder="{$this->options_['frameborder']}"></iframe>
 
 EOD;
 
-	return $html
+	return $html;
     }
 
     /**
