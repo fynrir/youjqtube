@@ -80,12 +80,14 @@ class youJQtube
 		);
 		}
         //Check if div_id key is null or if it contains nothing. If it happens. Kill PHP execution.
-        if ($options->div_id == null || empty($options->div_id)) {
+        if (!array_key_exists('div_id', $options)) {
             $Message = <<<EOD
-NO id key defined in $options array in youJStube, failure to continue execution.<br>
-You MUST give $options a div_id key with a string when using the youJStube package.<br>
+NO id key defined in &#36;options array in youJStube, failure to continue execution.<br>
+You MUST give &#36;options a div_id key with a string when using the youJStube package.<br>
 Please do so in your code. If you belivie this is a error not from your doing.<br>
 As in you actually gave it a ID. Fill a bug report and describe what you were doing when it happened.
+
+The key you need to assign to your options array is div_id, give it something unique to seperate it from all other youtube players.
 EOD;
             die($Message);
         }
