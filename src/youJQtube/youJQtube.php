@@ -117,7 +117,7 @@ EOD;
     }
 
     public function getHTML() {
-      die(var_dump($this->$options_));
+      die(var_dump($this->options_));
     //All isset checks will be done here. If they are not set. They will be given default values (true for any booleans).
     //==============================================================================================================
     if (!isset($this->options_['min_width'])) {$this->options_['min_width'] = 640;}
