@@ -117,13 +117,13 @@ EOD;
     }
 
     public function getHTML() {
-      die(var_dump($this->options_));
+
     //All isset checks will be done here. If they are not set. They will be given default values (true for any booleans).
     //==============================================================================================================
     if (!isset($this->options_['min_width'])) {$this->options_['min_width'] = 640;}
-    if (!isset($this->options_->min_height)) {$this->options_->min_height = 360;}    
-    if (!isset($this->options_->resize_able)) {$this->options_->resize_able = true;}
-    if (!isset($this->options_->move_able)) {$this->options_->move_able = true;}
+    if (!isset($this->options_['min_height'])) {$this->options_['min_height'] = 360;}    
+    if (!isset($this->options_['resize_able'])) {$this->options_['resize_able'] = true;}
+    if (!isset($this->options_['move_able'])) {$this->options_['move_able'] = true;}
     //==============================================================================================================
     //Default setting for frameborder, Change 0 to 1 if you like the frameborder for some wierd reason (it is ugly).
     $this->options_->frameborder = '0';
