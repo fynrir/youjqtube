@@ -164,27 +164,27 @@ EOD;
 
     } elseif (isset($this->options_['move_able_container']) && $this->options_['move_able_container'] == true){
       $move_able = <<<EOD
-.draggable({
+.draggable(\{
   containment: "parent"
-})
+\})
 EOD;
     }
     //Vertical movement only.
     elseif (isset($this->options_['move_able_container_y.axis']) && $this->options_['move_able_container_y.axis'] == true){
       $move_able = <<<EOD
-.draggable({
+.draggable(\{
   containment: "parent"
   axis: "y"
-})
+\})
 EOD;
     }
     //Horizontal movement only.
     elseif (isset($this->options_['move_able_container_x.axis']) && $this->options_['move_able_container_x.axis'] == true){
       $move_able = <<<EOD
-.draggable({
+.draggable(\{
   containment: "parent"
   axis: "x"
-})
+\})
 EOD;
     }
 //======================================================================================================================================
@@ -192,17 +192,17 @@ EOD;
 //======================================================================================================================================
     if (isset($this->options_['resize_able']) && $this->options_['resize_able'] == true) {
       $resize_able = <<<EOD 
-.resizable({
+.resizable(\{
 helper: "ui-resizable-helper"
-})
+\})
 EOD;
     }
     if (isset($this->options_['resize_able_container']) && $this->options_['resize_able_container'] == true) {
       $resize_able = <<<EOD 
-.resizable({
+.resizable(\{
 containment: "parent"
 helper: "ui-resizable-helper"
-})
+\})
 EOD;
     }
     if (!empty($move_able) || !empty($resize_able)) {
