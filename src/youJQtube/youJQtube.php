@@ -73,8 +73,8 @@ class youJQtube
 		if (empty($options)) {
 			$options = array(
         'div_id'      => 'youJStube-Default-ID',
-    		'min_height'	=> '640',
-    		'min_width'		=> '360',
+    		'min_height'	=> 640,
+    		'min_width'		=> 360,
     		'resize_able'	=> true,
     		'move_able'		=> true,
 		);
@@ -117,9 +117,10 @@ EOD;
     }
 
     public function getHTML() {
+      die(var_dump($this->$options_));
     //All isset checks will be done here. If they are not set. They will be given default values (true for any booleans).
     //==============================================================================================================
-    if (!isset($this->options_->min_width)) {$this->options_->min_width = 640;}
+    if (!isset($this->options_['min_width'])) {$this->options_['min_width'] = 640;}
     if (!isset($this->options_->min_height)) {$this->options_->min_height = 360;}    
     if (!isset($this->options_->resize_able)) {$this->options_->resize_able = true;}
     if (!isset($this->options_->move_able)) {$this->options_->move_able = true;}
@@ -167,11 +168,13 @@ $('#{$div_id}')
 </script>
 <div id='{$div_id}' {$css_class} style='width:{$min_width}px; height:{$min_height}px'>
 <iframe id="player" type="text/html" width="{$min_width}" height="{$min_height}"
-src="http://www.youtube.com/embed/{$this->youtubeurlid}?enablejsapi=1&origin={$this->origin_}"
+src="http://www.youtube.com/embed/{$this->youtubeurlid_}?enablejsapi=1&origin={$this->origin_}"
 frameborder="{$this->options_->frameborder}"></iframe>
 <div>
 
 EOD;
+
+
 
 	return $html_jquery;
     }
