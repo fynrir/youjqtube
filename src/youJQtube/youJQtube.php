@@ -18,7 +18,7 @@ namespace fynrir\youJQtube;
  * @package youJQtube
  */
 
-class youJQtube implements \ArrayAccess
+class youJQtube
 {
 
 	/**
@@ -182,7 +182,7 @@ EOD;
  * @param string $url
  * @return string Youtube video id or FALSE if none found. 
  */
-function youtube_id_from_url($url) {
+public function youtube_id_from_url($url) {
     $pattern = 
         '%^# Match any youtube URL
         (?:https?://)?  # Optional scheme. Either http or https
