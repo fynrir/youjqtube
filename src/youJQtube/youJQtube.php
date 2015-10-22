@@ -25,7 +25,7 @@ class youJQtube
 	 * Properties
 	 */
 
-	public $youtubeurlID_; //The extracted ID from the youtube url.
+	public $youtubeurlid_; //The extracted ID from the youtube url.
 	public $options_; 		//The options.
 	public $origin_;       //It's extremly important that you assign $origin_; a proper domain. OR the path to where the player will appear.
                     //If you use fontcontrollers/frameworks etc. Then it should be enough to get the path for the froncontroller.
@@ -109,8 +109,10 @@ EOD;
         }
 
         $this->origin_ = $origin;
-    	$this->youtubeurlID_ = $youtubeid;
+    	$this->youtubeurlid_ = $youtubeid;
     	$this->options_ = $options;
+      print_r($youtubeid);
+      die(var_dump($this->youtubeurlid_));
         return $this;
     }
 
@@ -165,13 +167,13 @@ $('#{$div_id}')
 </script>
 <div id='{$div_id}' {$css_class} style='width:{$min_width}px; height:{$min_height}px'>
 <iframe id="player" type="text/html" width="{$min_width}" height="{$min_height}"
-src="http://www.youtube.com/embed/{$this->youtubeurlID}?enablejsapi=1&origin={$this->origin_}"
+src="http://www.youtube.com/embed/{$this->youtubeurlid}?enablejsapi=1&origin={$this->origin_}"
 frameborder="{$this->options_->frameborder}"></iframe>
 <div>
 
 EOD;
 
-	return $html;
+	return $html_jquery;
     }
 
     /**
