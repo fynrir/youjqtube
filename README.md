@@ -80,7 +80,7 @@ In your index.php or similar, place this code somewhere:
 ```
 $youtube = new \fynrir\youJQtube\youJQtube('Your Domain here or path to your index.php or front controller.');
 ```
-examples
+examples:
 
 ```
 $youjqtube = new \fynrir\youJQtube\youJQtube('www.example.com');
@@ -88,8 +88,112 @@ $youjqtube = new \fynrir\youJQtube\youJQtube('www.example.com/index.php');
 ```
 Please provide a full path including the filetype ending. Not just /index
 
-And then do this:
-echo $youtube->getHTML();
+As I want my package to be as secure as it can be. It absolutely demands you do set a origin.
+It's the only constructor parameter that does not have a default value. 
+If you do not own the entire domain. I highly recommend pointing the origin
+at the page where the player is to be implemented. As you can see in the example 
+that was provided earlier for you.
+
+Why? Because not specifying a origin when creating the youtube player can lead to some nasty side effects
+like... javascript injections and such. This is a recommendation from google as seen here:
+https://developers.google.com/youtube/iframe_api_reference#Loading_a_Video_Player
+
+Quote from the section "Loading a video player" near the end:
+
+> As an extra security measure, you should also include the origin parameter to the URL, specifying the URL scheme 
+> (http:// or https://) and full domain of your host page as the parameter value. 
+> While origin is optional, including it protects against malicious third-party JavaScript being injected into 
+> your page and hijacking control of your YouTube player.
+
+NOTE: If you make use of front controllers. It should be enough to just specify the frontcontroller. 
+Like www.example.com/index.php
+And not www.example.com/index.php/news
+You should not need to specify for every single different route/whatever name your
+framework you might use. This is how I have percivied it.
+This has not been tested tough to that extent as I do not know how the origin works fully.
+Up to you.
+
+When you are done with that and have filled in a valid origin, do this:
+echo $youjqtube->getHTML();
+
+You are not done yet. While this will be enough to display the
+youtube player on the page. You need to do a couple more things before you can take benefit of the two main features.
+
+in the src folder is a css folder. Grab the CSS file in there and shove it into your projects css folder.
+Then include the CSS file before the youjqtube class object. Preferably in your header.
+
+This CSS file is not to be modified unless you know what you are doing. 
+You can add css classes yourself to the div that is generated using
+$options['css_class'] = "String of classes. Seperate classes with spaces and do not use spaces inside the class name";
+
+Example of css class names:
+
+```
+Valid:
+
+blue-color
+Bluecolor
+
+Invalid:
+
+blue color
+Blue color
+
+Valid string when using self-made css classes:
+
+"blue-color Bluecolor"
+
+Invalid string when using self-made css classes:
+
+"blue-colorBluecolor"
+"blue color Bluecolor"
+```
+
+Therefor, No spaces inside class names. And when you create a string for 
+the $options['css_class'], you want to seperate your class names with 1 space.
+
+
+###$options###
+
+This is where the majority of your configuring will happen.
+The class youJQtube will create it's own default options if you
+ethier just create a simple youjqtube variable. Or if you only
+specify a youtube url. It will be resizeable and draggable inside the entire
+browser by default.
+
+However, you can specify the options yourself! And here's the way on creating
+the $options array:
+
+```
+$options = array(
+'div_id'     	=> 'youJStube-Default-ID',
+'min_height' 	=> 360,
+'min_width'  	=> 640,
+'resize_able'	=> true,
+'move_able'  	=> true,
+);
+```
+Note: Do not make it a object. The package is intended to use associative arrays where key=value.
+It will crash and burn if you mess it up so you get something like Indexes or type stdClass on the array.
+
+List of all options and what they do:
+
+**'div_id' => 'String'**
+
+This needs to be set if you intend to use your own $options array.
+The script will kill your PHP execution with a vengeance if you don't.
+
+Make the ID unique, don't make two players and use the same ID for them both.
+Use a css class instead to style them!
+
+**'min_height' => Whole int number here. No decimals or funny stuff.**
+
+The number of pixels in height the player should start out as.
+**Do not put single or double qoute tags around the number!!**
+
+
+
+
 
 
 
