@@ -108,7 +108,7 @@ EOD;
             die($Message);
         }
 
-        $this->origin_ = $origin
+        $this->origin_ = $origin;
     	$this->youtubeurlID_ = $youtubeid;
     	$this->options_ = $options;
         return $this;
