@@ -152,13 +152,64 @@ EOD;
     } else 
     {$css_class   = "class='".$this->options_->css_class." youjqtubecontainer'";}
     $div_id = $this->options_['div_id'];
+//======================================================================================================================================
     //Default checks for true on default move and resize_able, but also checks for 
     //optional settings like resize_able_contain.
-    if ($this->options_['move_able'] == true) {$move_able = ".draggable()";}
-    if ($this->options_['resize_able'] == true) {$resize_able = ".resizable()";}
+    //options that use "container" default to parent element.
+//======================================================================================================================================
+    //Draggable default check, and it's other options.
+//======================================================================================================================================
+    if (isset($this->options_['move_able']) && $this->options_['move_able'] == true) {
+      $move_able = <<<EOD 
+.draggable()
+EOD;
+    } elseif (isset($this->options_['move_able_container']) && $this->options_['move_able_container'] == true){
+      $move_able = <<<EOD
+.draggable({
+  containment: "parent"
+})
+EOD;
+    }
+    //Vertical movement only.
+    elseif (isset($this->options_['move_able_container_y.axis']) && $this->options_['move_able_container_y.axis'] == true){
+      $move_able = <<<EOD
+.draggable({
+  containment: "parent"
+  axis: "y"
+})
+EOD;
+    }
+    //Horizontal movement only.
+    elseif (isset($this->options_['move_able_container_x.axis']) && $this->options_['move_able_container_x.axis'] == true){
+      $move_able = <<<EOD
+.draggable({
+  containment: "parent"
+  axis: "x"
+})
+EOD;
+    }
+//======================================================================================================================================
+    //Resizeable default check, and it's other options.
+//======================================================================================================================================
+    if (isset($this->options_['resize_able']) && $this->options_['resize_able'] == true) {
+      $resize_able = <<<EOD 
+.resizable({
+helper: "ui-resizable-helper"
+})
+EOD;
+    }
+    if (isset($this->options_['resize_able_container']) && $this->options_['resize_able_container'] == true) {
+      $resize_able = <<<EOD 
+.resizable({
+containment: "parent"
+helper: "ui-resizable-helper"
+})
+EOD;
+    }
     if (!empty($move_able) || !empty($resize_able)) {
         $scriptfinisher = ";";
     }
+//======================================================================================================================================
 
     
 
