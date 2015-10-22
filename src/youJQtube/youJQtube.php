@@ -38,8 +38,8 @@ class youJQtube
      * @param string $youtubeurl the complete URL for a youtube video
      * @param array $options options for the div.
      * 
-     * These options are: div-id (string), min-height (int), min-width (int), css-class (string),
-     * resize-able (boolean), and move-able (boolean).
+     * These options are: div_id (string), min_height (int), min_width (int), css_class (string),
+     * resize_able (boolean), and move_able (boolean).
      * frameborder is also a possible option. But I suggest leaving it as it is already
      * in the getHTML method near the bottom of this class.
      *
@@ -57,7 +57,7 @@ class youJQtube
      * see UNLINCENSE.md, and also read it's exception section so we are clear on what is correct.
      *
      */
-    public function __construct($youtubeurl = '', $options = [], $origin)
+    public function __construct($origin, $youtubeurl = '', $options = [])
     {
     	//If the $youtubeurl is empty, assign a default URL for testing this package and it's full extent of
     	//resizeable and moveability.
@@ -72,18 +72,18 @@ class youJQtube
 		//If the $options array is empty, assign some default values for testing.
 		if (empty($options)) {
 			$options = (object) array(
-            'div-id'        => 'youJStube-Default-ID',
-    		'min-height'	=> '640',
-    		'min-width'		=> '360',
-    		'resize-able'	=> true,
-    		'move-able'		=> true,
+        'div_id'      => 'youJStube-Default-ID',
+    		'min_height'	=> '640',
+    		'min_width'		=> '360',
+    		'resize_able'	=> true,
+    		'move_able'		=> true,
 		);
 		}
-        //Check if div-id key is null or if it contains nothing. If it happens. Kill PHP execution.
-        if ($options['div-id'] == null || empty($options['div-id'])) {
+        //Check if div_id key is null or if it contains nothing. If it happens. Kill PHP execution.
+        if ($options['div_id'] == null || empty($options['div_id'])) {
             $Message = <<<EOD
 NO id key defined in $options array in youJStube, failure to continue execution.<br>
-You MUST give $options a div-id key with a string when using the youJStube package.<br>
+You MUST give $options a div_id key with a string when using the youJStube package.<br>
 Please do so in your code. If you belivie this is a error not from your doing.<br>
 As in you actually gave it a ID. Fill a bug report and describe what you were doing when it happened.
 EOD;
@@ -117,39 +117,39 @@ EOD;
     public function getHTML() {
     //All isset checks will be done here. If they are not set. They will be given default values (true for any booleans).
     //==============================================================================================================
-    if (!isset($this->options_['min-width'])) {$this->options_['resize-able'] = 640;}
-    if (!isset($this->options_['min-height'])) {$this->options_['resize-able'] = 360;}    
-    if (!isset($this->options_['resize-able'])) {$this->options_['resize-able'] = true;}
-    if (!isset($this->options_['move-able'])) {$this->options_['move-able'] = true;}
+    if (!isset($this->options_['min_width'])) {$this->options_['resize_able'] = 640;}
+    if (!isset($this->options_['min_height'])) {$this->options_['resize_able'] = 360;}    
+    if (!isset($this->options_['resize_able'])) {$this->options_['resize_able'] = true;}
+    if (!isset($this->options_['move_able'])) {$this->options_['move_able'] = true;}
     //==============================================================================================================
     //Default setting for frameborder, Change 0 to 1 if you like the frameborder for some wierd reason (it is ugly).
     $this->options_['frameborder'] = '0';
     //==============================================================================================================
     // If checks for width and height to prevent possible errors. Decimals are not okay.
     //If any of them get's caught in the if checks. It will revent them to default values.
-    if (is_int($this->options_['min-width']) == false || !is_numeric($this->options_['min-width'])) {
-        $this->options_['min-width'] = 640;
+    if (is_int($this->options_['min_width']) == false || !is_numeric($this->options_['min_width'])) {
+        $this->options_['min_width'] = 640;
     }
-    if (is_int($this->options_['min-height']) == false || !is_numeric($this->options_['min-height'])) {
-        $this->options_['min-height'] = 360;
+    if (is_int($this->options_['min_height']) == false || !is_numeric($this->options_['min_height'])) {
+        $this->options_['min_height'] = 360;
     }
     
-    //If checks to see if user forgot to set false or true on resize-able and move-able in $options array.
+    //If checks to see if user forgot to set false or true on resize_able and move_able in $options array.
     //If so, revert to default which is true. 
-    if ($this->options_['resize-able'] == null || empty($this->options_['resize-able'])) {$this->options_['resize-able'] = true;}
-    if ($this->options_['move-able'] == null || empty($this->options_['move-able'])) {$this->options_['move-able']   = true;}
+    if ($this->options_['resize_able'] == null || empty($this->options_['resize_able'])) {$this->options_['resize_able'] = true;}
+    if ($this->options_['move_able'] == null || empty($this->options_['move_able'])) {$this->options_['move_able']   = true;}
     //==============================================================================================================
-    $min_width   = $this->options_['min-width'];
-    $min_height  = $this->options_['min-height'];
+    $min_width   = $this->options_['min_width'];
+    $min_height  = $this->options_['min_height'];
 
-    if (empty($this->options_['css-class']) || $this->options_['css-class'] == null) {
+    if (empty($this->options_['css_class']) || $this->options_['css_class'] == null) {
         $css_class = '';
     } else 
-    {$css_class   = "class='".$this->options_['css-class']."'";}
-    $div_id = $this->options_['div-id'];
+    {$css_class   = "class='".$this->options_['css_class']."'";}
+    $div_id = $this->options_['div_id'];
     
-    if ($this->options_['move-able'] == true) {$move_able = ".draggable()";}
-    if ($this->options_['resize-able'] == true) {$resize_able = ".resizable()";}
+    if ($this->options_['move_able'] == true) {$move_able = ".draggable()";}
+    if ($this->options_['resize_able'] == true) {$resize_able = ".resizable()";}
     if (!empty($move_able) || !empty($resize_able)) {
         $scriptfinisher = ";";
     }
