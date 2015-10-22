@@ -71,7 +71,7 @@ class youJQtube
     	}
 		//If the $options array is empty, assign some default values for testing.
 		if (empty($options)) {
-			$options = (object) array(
+			$options = array(
         'div_id'      => 'youJStube-Default-ID',
     		'min_height'	=> '640',
     		'min_width'		=> '360',
