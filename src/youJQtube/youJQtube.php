@@ -113,8 +113,6 @@ EOD;
         $this->origin_ = $origin;
     	$this->youtubeurlid_ = $youtubeid;
     	$this->options_ = $options;
-      print_r($youtubeid);
-      die(var_dump($this->youtubeurlid_));
         return $this;
     }
 
