@@ -169,7 +169,7 @@ $('#{$div_id}')
 <div id='{$div_id}' {$css_class} style='width:{$min_width}px; height:{$min_height}px'>
 <iframe id="player" type="text/html" width="{$min_width}" height="{$min_height}"
 src="http://www.youtube.com/embed/{$this->youtubeurlid_}?enablejsapi=1&origin={$this->origin_}"
-frameborder="{$this->options['frameborder']}"></iframe>
+frameborder="{$this->options_['frameborder']}"></iframe>
 <p>Click and hold mouse botton in this area and drag me around!</p>
 <div>
 
