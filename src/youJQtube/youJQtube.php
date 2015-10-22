@@ -216,11 +216,17 @@ EOD;
     	$html_jquery = <<<EOD
 <link href="css/youjqtubecss.css" rel="stylesheet" type="text/css">
 <div id='{$div_id}' {$css_class} style='width:{$min_width}px; height:{$min_height}px'>
-<iframe id="player" type="text/html" width="100%" height="100%"
+<iframe id="player" type="text/html"
 src="http://www.youtube.com/embed/{$this->youtubeurlid_}?enablejsapi=1&origin={$this->origin_}"
 frameborder="{$this->options_['frameborder']}"></iframe>
 </div>
 <script>
+$( document ).ready(function() {
+    .('#{$div_id}}').height({$min_height})
+    .('#{$div_id}}').width({$min_width})
+});
+
+
 $('#{$div_id}')
     {$move_able}
     {$resize_able}
