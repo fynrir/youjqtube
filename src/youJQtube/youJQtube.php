@@ -130,10 +130,10 @@ EOD;
     //==============================================================================================================
     // If checks for width and height to prevent possible errors. Decimals are not okay.
     //If any of them get's caught in the if checks. It will revent them to default values.
-    if (is_int($this->options_['min_width'])) == false || !is_numeric($this->options_['min_width'])) {
+    if (!is_int($this->options_['min_width'])) || !is_numeric($this->options_['min_width'])) {
         $this->options_['min_width'] = 640;
     }
-    if (is_int($this->options_['min_height'])) == false || !is_numeric($this->options_['min_height'])) {
+    if (!is_int($this->options_['min_height'])) || !is_numeric($this->options_['min_height'])) {
         $this->options_['min_height'] = 360;
     }
     
