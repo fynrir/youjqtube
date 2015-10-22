@@ -80,7 +80,7 @@ class youJQtube
 		);
 		}
         //Check if div_id key is null or if it contains nothing. If it happens. Kill PHP execution.
-        if ($options['div_id'] == null || empty($options['div_id'])) {
+        if ($options->div_id == null || empty($options->div_id)) {
             $Message = <<<EOD
 NO id key defined in $options array in youJStube, failure to continue execution.<br>
 You MUST give $options a div_id key with a string when using the youJStube package.<br>
@@ -117,39 +117,39 @@ EOD;
     public function getHTML() {
     //All isset checks will be done here. If they are not set. They will be given default values (true for any booleans).
     //==============================================================================================================
-    if (!isset($this->options_['min_width'])) {$this->options_['resize_able'] = 640;}
-    if (!isset($this->options_['min_height'])) {$this->options_['resize_able'] = 360;}    
-    if (!isset($this->options_['resize_able'])) {$this->options_['resize_able'] = true;}
-    if (!isset($this->options_['move_able'])) {$this->options_['move_able'] = true;}
+    if (!isset($this->options_->min_width)) {$this->options_->min_width = 640;}
+    if (!isset($this->options_->min_height)) {$this->options_->min_height = 360;}    
+    if (!isset($this->options_->resize_able)) {$this->options_->resize_able = true;}
+    if (!isset($this->options_->move_able)) {$this->options_->move_able = true;}
     //==============================================================================================================
     //Default setting for frameborder, Change 0 to 1 if you like the frameborder for some wierd reason (it is ugly).
-    $this->options_['frameborder'] = '0';
+    $this->options_->frameborder = '0';
     //==============================================================================================================
     // If checks for width and height to prevent possible errors. Decimals are not okay.
     //If any of them get's caught in the if checks. It will revent them to default values.
-    if (is_int($this->options_['min_width']) == false || !is_numeric($this->options_['min_width'])) {
-        $this->options_['min_width'] = 640;
+    if (is_int($this->options_->min_width) == false || !is_numeric($this->options_->min_width)) {
+        $this->options_->min_width = 640;
     }
-    if (is_int($this->options_['min_height']) == false || !is_numeric($this->options_['min_height'])) {
-        $this->options_['min_height'] = 360;
+    if (is_int($this->options_->min_height) == false || !is_numeric($this->options_->min_height)) {
+        $this->options_->min_height = 360;
     }
     
     //If checks to see if user forgot to set false or true on resize_able and move_able in $options array.
     //If so, revert to default which is true. 
-    if ($this->options_['resize_able'] == null || empty($this->options_['resize_able'])) {$this->options_['resize_able'] = true;}
-    if ($this->options_['move_able'] == null || empty($this->options_['move_able'])) {$this->options_['move_able']   = true;}
+    if ($this->options_->resize_able == null || empty($this->options_->resize_able)) {$this->options_->resize_able = true;}
+    if ($this->options_->move_able == null || empty($this->options_->move_able)) {$this->options_->move_able   = true;}
     //==============================================================================================================
-    $min_width   = $this->options_['min_width'];
-    $min_height  = $this->options_['min_height'];
+    $min_width   = $this->options_->min_width;
+    $min_height  = $this->options_->min_height;
 
-    if (empty($this->options_['css_class']) || $this->options_['css_class'] == null) {
+    if (empty($this->options_->css_class) || $this->options_->css_class == null) {
         $css_class = '';
     } else 
-    {$css_class   = "class='".$this->options_['css_class']."'";}
-    $div_id = $this->options_['div_id'];
+    {$css_class   = "class='".$this->options_->css_class."'";}
+    $div_id = $this->options_->div_id;
     
-    if ($this->options_['move_able'] == true) {$move_able = ".draggable()";}
-    if ($this->options_['resize_able'] == true) {$resize_able = ".resizable()";}
+    if ($this->options_->move_able == true) {$move_able = ".draggable()";}
+    if ($this->options_->resize_able == true) {$resize_able = ".resizable()";}
     if (!empty($move_able) || !empty($resize_able)) {
         $scriptfinisher = ";";
     }
@@ -166,7 +166,7 @@ $('#{$div_id}')
 <div id='{$div_id}' {$css_class} style='width:{$min_width}px; height:{$min_height}px'>
 <iframe id="player" type="text/html" width="{$min_width}" height="{$min_height}"
 src="http://www.youtube.com/embed/{$this->youtubeurlID}?enablejsapi=1&origin={$this->origin_}"
-frameborder="{$this->options_['frameborder']}"></iframe>
+frameborder="{$this->options_->frameborder}"></iframe>
 <div>
 
 EOD;
