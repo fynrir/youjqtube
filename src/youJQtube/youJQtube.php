@@ -222,8 +222,8 @@ frameborder="{$this->options_['frameborder']}"></iframe>
 </div>
 <script>
 $( document ).ready(function() {
-    .('#{$div_id}}').height({$min_height})
-    .('#{$div_id}}').width({$min_width})
+    ('#{$div_id}').height({$min_height})
+    ('#{$div_id}').width({$min_width})
 });
 
 
