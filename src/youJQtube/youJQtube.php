@@ -160,9 +160,8 @@ EOD;
     //Draggable default check, and it's other options.
 //======================================================================================================================================
     if (isset($this->options_['move_able']) && $this->options_['move_able'] == true) {
-      $move_able = <<<EOD 
-.draggable()
-EOD;
+      $move_able = ".draggable()";
+
     } elseif (isset($this->options_['move_able_container']) && $this->options_['move_able_container'] == true){
       $move_able = <<<EOD
 .draggable({
@@ -217,7 +216,7 @@ EOD;
     	$html_jquery = <<<EOD
 <link href="css/youjqtubecss.css" rel="stylesheet" type="text/css">
 <div id='{$div_id}' {$css_class} style='width:{$min_width}px; height:{$min_height}px'>
-<iframe id="player" type="text/html" width="{$min_width}" height="{$min_height}"
+<iframe id="player" type="text/html" 
 src="http://www.youtube.com/embed/{$this->youtubeurlid_}?enablejsapi=1&origin={$this->origin_}"
 frameborder="{$this->options_['frameborder']}"></iframe>
 </div>
