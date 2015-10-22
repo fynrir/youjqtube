@@ -73,8 +73,8 @@ class youJQtube
 		if (empty($options)) {
 			$options = array(
         'div_id'      => 'youJStube-Default-ID',
-    		'min_height'	=> 640,
-    		'min_width'		=> 360,
+    		'min_height'	=> 360,
+    		'min_width'		=> 640,
     		'resize_able'	=> true,
     		'move_able'		=> true,
 		);
@@ -166,7 +166,7 @@ EOD;
 src="http://www.youtube.com/embed/{$this->youtubeurlid_}?enablejsapi=1&origin={$this->origin_}"
 frameborder="{$this->options_['frameborder']}"></iframe>
 <p>Click and hold mouse botton in this area and drag me around!</p>
-<div>
+</div>
 <script>
 $('#{$div_id}')
     {$move_able}
