@@ -44,6 +44,8 @@ class youJQtube
      * in the getHTML method near the bottom of this class.
      *
      * Do NOT apply a width and height yourself using CSS. The div will resize itself automatically to what options says.
+     *
+     * The div can be styled further by creating css classes.
      * 
      * You must give the div a ID, which is done trough options. Failure to give a ID when you call method leads to
      * a die("NO id key defined in $options array, failure to continue execution"); 
@@ -146,11 +148,12 @@ EOD;
     $min_height  = $this->options_['min_height'];
 
     if (empty($this->options_->css_class) || $this->options_->css_class == null) {
-        $css_class = '';
+        $css_class = "class='youjqtubecontainer'";
     } else 
-    {$css_class   = "class='".$this->options_->css_class."'";}
+    {$css_class   = "class='".$this->options_->css_class." youjqtubecontainer'";}
     $div_id = $this->options_['div_id'];
-    
+    //Default checks for true on default move and resize_able, but also checks for 
+    //optional settings like resize_able_contain.
     if ($this->options_['move_able'] == true) {$move_able = ".draggable()";}
     if ($this->options_['resize_able'] == true) {$resize_able = ".resizable()";}
     if (!empty($move_able) || !empty($resize_able)) {
@@ -161,11 +164,11 @@ EOD;
 
 
     	$html_jquery = <<<EOD
+<link href="css/youjqtubecss.css" rel="stylesheet" type="text/css">
 <div id='{$div_id}' {$css_class} style='width:{$min_width}px; height:{$min_height}px'>
 <iframe id="player" type="text/html" width="{$min_width}" height="{$min_height}"
 src="http://www.youtube.com/embed/{$this->youtubeurlid_}?enablejsapi=1&origin={$this->origin_}"
 frameborder="{$this->options_['frameborder']}"></iframe>
-<p>Click and hold mouse botton in this area and drag me around!</p>
 </div>
 <script>
 $('#{$div_id}')
