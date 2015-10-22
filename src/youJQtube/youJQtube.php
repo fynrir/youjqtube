@@ -191,14 +191,14 @@ EOD;
     //Resizeable default check, and it's other options.
 //======================================================================================================================================
     if (isset($this->options_['resize_able']) && $this->options_['resize_able'] == true) {
-      $resize_able = <<<EOD
+      $resize_able = <<<'EOD'
 .resizable({
 helper: "ui-resizable-helper"
 })
 EOD;
     }
     if (isset($this->options_['resize_able_container']) && $this->options_['resize_able_container'] == true) {
-      $resize_able = <<<EOD
+      $resize_able = <<<'EOD'
 .resizable({
 containment: "parent"
 helper: "ui-resizable-helper"
@@ -216,14 +216,15 @@ EOD;
     	$html_jquery = <<<EOD
 <link href="css/youjqtubecss.css" rel="stylesheet" type="text/css">
 <div id='{$div_id}' {$css_class} style='width:{$min_width}px; height:{$min_height}px'>
-<iframe id="player" type="text/html" 
+<iframe id="player" type="text/html" width="100%" height="100%"
 src="http://www.youtube.com/embed/{$this->youtubeurlid_}?enablejsapi=1&origin={$this->origin_}"
 frameborder="{$this->options_['frameborder']}"></iframe>
 </div>
 <script>
 $('#{$div_id}')
     {$move_able}
-    {$resize_able}{$scriptfinisher}
+    {$resize_able}
+    {$scriptfinisher}
 </script>
 EOD;
 
