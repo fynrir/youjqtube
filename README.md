@@ -57,7 +57,15 @@ Before we continue. You really should read this: https://getcomposer.org/doc/01-
 
 #If you use GIT!!!!
 
-***The composer team suggests you add vendor to your .gitignore***
+The composer team suggests that you add vendor to your .gitignore
+Otherwise all code in the vendor folder will be uploaded too when you push
+your projects to wherever you store them.
+
+If you project depends on what's in the vendor folder. I suggest you first read the licenses for the packages
+you are using. Then rip out the packages from the vendor folder and move the classes directly to your project.
+
+Don't forget to also provide the licenses for the packages.
+And specify which parts of the project is from which package.
 
 #Continuation
 
@@ -69,12 +77,21 @@ Here's the commands for installing the package.
 The quickest way to test and see if the package was installed correctly is this:
 
 In your index.php or similar, place this code somewhere:
-$youtube = new \fynrir\youJQtube\youJQtube();
+```
+$youtube = new \fynrir\youJQtube\youJQtube('Your Domain here or path to your index.php or front controller.');
+```
+examples
+
+```
+$youjqtube = new \fynrir\youJQtube\youJQtube('www.example.com');
+$youjqtube = new \fynrir\youJQtube\youJQtube('www.example.com/index.php');
+```
+Please provide a full path including the filetype ending. Not just /index
 
 And then do this:
 echo $youtube->getHTML();
 
-ewgewgewgrhejhejej
+
 
 
 
