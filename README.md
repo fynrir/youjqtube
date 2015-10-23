@@ -24,6 +24,8 @@ It also comes with a autoloader. The installation instructions will not be going
 how to create an autoloader and such. Go read: http://php.net/manual/en/language.oop5.autoload.php
 And make a autoloader for your project.
 
+Anax-MVC users should read at the bottom of this README.md in the section "Anax-MVC"!
+
 As such that is the way we will install this package.
 
 1. Ensure that you have composer installed. If you do not, here's how to install it using LinuxMint KDE as an example.
@@ -43,7 +45,7 @@ Open a text-editor and paste this text into it:
 {
     "require": {
         "php": ">=5.4",
-        "fynrir/youjqtube": "dev-master"
+        "fynrir/youjqtube": "1.0"
     }
 }
 ```
@@ -71,6 +73,22 @@ And specify which parts of the project is from which package.
 
 Here's the commands for installing the package.
 
+First, validate the composer.json file so it is valid:
+
+```
+php composer.phar validate
+```
+
+The validation process might spit out a warning or two. But it should not show any errors.
+The warnings can be ignored for now.
+
+Then, do this:
+
+```
+php composer.phar install --no-dev
+```
+
+We tell it --no-dev because we don't want any strange dev settings on.
 
 ***Basic Usage***
 
@@ -78,7 +96,7 @@ The quickest way to test and see if the package was installed correctly is this:
 
 In your index.php or similar, place this code somewhere:
 ```
-$youtube = new \fynrir\youJQtube\youJQtube('Your Domain here or path to your index.php or front controller.');
+$youjqtube = new \fynrir\youJQtube\youJQtube('Your Domain here or path to your index.php or front controller.');
 ```
 examples:
 
@@ -120,7 +138,7 @@ You are not done yet. While this will be enough to display the
 youtube player on the page. You need to do a couple more things before you can take benefit of the two main features.
 
 in the src folder is a css folder. Grab the CSS file in there and shove it into your projects css folder.
-Then include the CSS file before the youjqtube class object. Preferably in your header.
+Then link the CSS file before the youjqtube class object. Preferably in your header.
 
 This CSS file is not to be modified unless you know what you are doing. 
 You can add css classes yourself to the div that is generated using
@@ -176,20 +194,121 @@ $options = array(
 Note: Do not make it a object. The package is intended to use associative arrays where key=value.
 It will crash and burn if you mess it up so you get something like Indexes or type stdClass on the array.
 
+Also, only use one of the resize or moveable options at a time.
+If you use resize_able_container, then don't use resize_able.
+
 List of all options and what they do:
 
-**'div_id' => 'String'**
+> **'div_id' => 'String'**
+> 
+> This needs to be set if you intend to use your own $options array.
+> The script will kill your PHP execution with a vengeance if you don't.
+> 
+> Make the ID unique, don't make two players and use the same ID for them both.
+> Use a css class instead to style them!
+> 
+> **'min_height' => Whole int number here. No decimals or funny stuff.**
+> 
+> The number of pixels in height the player should start out as.
+> **Do not put single or double qoute tags around the number!!**
+> 
+> **'min_width' => Whole int number here. No decimals or funny stuff.**
+> 
+> The number of pixels in height the player should start out as.
+> **Do not put single or double qoute tags around the number!!**
+> 
+> **'css_class' => 'String of class names'**
+> 
+> If you set this option, you can add more CSS classes to style the div further.
+> The string should look like this:
+> 
+> 'Blue-color FontAwesomeMixer Testclass bananaClass bananamango'
+> 
+> Spaces denote that another class is coming. So no spaces inside the actual class name!
+> Also no spaces at the beginning of the string and at the end!
+> 
+> **'resize_able'	=> true/false**
+> 
+> Should the user be able to resize the generated div (and subsequently the youtube player)?
+> 
+> **'move_able'	=> true/false**
+> 
+> Should the user be able to move the generated div (and subsequently the youtube player)?
+> 
+> **'move_able_container'	=> true/false**
+> 
+> Should the user be able to move the generated div (and subsequently the youtube player)?
+> Do note that it will not be able to move outside the size of the parent element.
+> 
+> **'move_able_container_y.axis'	=> true/false**
+> 
+> Should the user be able to move the generated div (and subsequently the youtube player)?
+> Do note that it will not be able to move outside the size of the parent element.
+> It will also not be able to move on the X axis. Only the Y axis.
+> 
+> **'move_able_container_x.axis'	=> true/false**
+> 
+> Should the user be able to move the generated div (and subsequently the youtube player)?
+> Do note that it will not be able to move outside the size of the parent element.
+> It will also not be able to move on the Y axis. Only the X axis.
+> 
+> **'resize_able_container'	=> true/false**
+> 
+> Should the user be able to resize the generated div (and subsequently the youtube player)?
+> Do note that it will not be able to be resized outside of the parent element.
+> **Warning: This option is a bit bugged. And has not been fully tested.**
 
-This needs to be set if you intend to use your own $options array.
-The script will kill your PHP execution with a vengeance if you don't.
+###Anax-MVC###
 
-Make the ID unique, don't make two players and use the same ID for them both.
-Use a css class instead to style them!
+Here are specific instructions for users of Anax-MVC, or if you are one of the few 
+people who happens to see this package and want to quickly test the package.
 
-**'min_height' => Whole int number here. No decimals or funny stuff.**
+Make a folder. Call it something, Like "youJQtubetest".
 
-The number of pixels in height the player should start out as.
-**Do not put single or double qoute tags around the number!!**
+Open the folder as a terminal, and do: git clone https://github.com/mosbth/Anax-MVC.git
+
+Then. Do the instructions for installing composer up until the composer.json part.
+There, you want to just take the line
+```
+"fynrir/youjqtube": "1.0"
+```
+
+And paste it into the require part of the composer.json that came with Anax-MVC.
+
+After that, you want to validate your composer.json file in the fresh anax-mvc install, and then install the package.
+
+After that. Grab the CSS file from the css folder in the package you installed. And put it into
+the css folder inside the webroot folder in the Anax-MVC install. After that, you want to copy the hello.php
+file from the packages webroot folder and overwrite the hello.php inside the webroot folder of
+the Anax-MVC install.
+
+Then, you want the config file too. So go into app/config of the package and grab the file in there. theme.php
+Overwrite the one that already exists in the same location in the actual Anax-MVC install.
+
+And at last, you want to go into the theme folder in the package and grab index.tpl.php,
+And then go into theme/anax-base of the Anax-MVC install, and overwrite the one
+that is already there.
+
+
+
+I claim no ownership of Anax-MVC. Read more about Anax-MVC here (google translated link. The accuracy of translation is mediocre:
+
+https://translate.google.com/translate?sl=sv&tl=en&js=y&prev=_t&hl=en&ie=UTF-8&u=http%3A%2F%2Fdbwebb.se%2Fkunskap%2Fanax-som-mvc-ramverk&edit-text=&act=url
+
+
+Versions:
+
+Version 1.0
+Complete release of intended features.
+
+
+To do:
+I don't know. Not sure if I will be updating this package. Considering this has probably been done better, and several times already.
+
+
+
+
+
 
 
 

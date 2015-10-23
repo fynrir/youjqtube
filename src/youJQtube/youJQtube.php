@@ -63,24 +63,27 @@ class youJQtube
     {
     	//If the $youtubeurl is empty, assign a default URL for testing this package and it's full extent of
     	//resizeable and moveability.
+      //die($youtubeurl);
     	if (empty($youtubeurl)) {
     		$youtubeurl = "https://www.youtube.com/watch?v=mcixldqDIEQ";
-    		try {
-    		$youtubeid = $this->youtube_id_from_url($youtubeurl);
-    	} catch (Exception $e) 
-    	{print_r('YoutubeURL convertion FAILED For unknown reasons. File a bug report and what<br> you were doing at the time it happened.');}
-    	
-    	}
+    		}
+
+    try {
+        $youtubeid = $this->youtube_id_from_url($youtubeurl);
+      } catch (Exception $e) 
+      {print_r('YoutubeURL convertion FAILED For unknown reasons. File a bug report and what<br> you were doing at the time it happened.');}
 		//If the $options array is empty, assign some default values for testing.
 		if (empty($options)) {
 			$options = array(
         'div_id'      => 'youJStube-Default-ID',
-    		'min_height'	=> 360,
-    		'min_width'		=> 640,
+    		'min_height'	=> 200,
+    		'min_width'		=> 200,
     		'resize_able'	=> true,
     		'move_able'		=> true,
 		);
 		}
+    //die(var_dump($options));
+
         //Check if div_id key is null or if it contains nothing. If it happens. Kill PHP execution.
         if (!array_key_exists('div_id', $options)) {
             $Message = <<<EOD
@@ -115,17 +118,15 @@ EOD;
         $this->origin_ = $origin;
     	$this->youtubeurlid_ = $youtubeid;
     	$this->options_ = $options;
-        return $this;
+        //return $this;
     }
 
     public function getHTML() {
-
+      //die("".var_dump($this->options_)."LOL");
     //All isset checks will be done here. If they are not set. They will be given default values (true for any booleans).
     //==============================================================================================================
     if (!isset($this->options_['min_width'])) {$this->options_['min_width'] = 640;}
     if (!isset($this->options_['min_height'])) {$this->options_['min_height'] = 360;}    
-    if (!isset($this->options_['resize_able'])) {$this->options_['resize_able'] = true;}
-    if (!isset($this->options_['move_able'])) {$this->options_['move_able'] = true;}
     //==============================================================================================================
     //Default setting for frameborder, Change 0 to 1 if you like the frameborder for some wierd reason (it is ugly).
     $this->options_['frameborder'] = '0';
@@ -139,18 +140,15 @@ EOD;
         $this->options_['min_height'] = 360;
     }
     
-    //If checks to see if user forgot to set false or true on resize_able and move_able in $options array.
-    //If so, revert to default which is true. 
-    if ($this->options_['resize_able'] == null || empty($this->options_['resize_able'])) {$this->options_['resize_able'] = true;}
-    if ($this->options_['move_able'] == null || empty($this->options_['move_able'])) {$this->options_['move_able']   = true;}
+    
     //==============================================================================================================
     $min_width   = $this->options_['min_width'];
     $min_height  = $this->options_['min_height'];
 
-    if (empty($this->options_->css_class) || $this->options_->css_class == null) {
+    if (empty($this->options_['css_class']) || $this->options['css_class'] == null) {
         $css_class = "class='youjqtubecontainer ui-resizable-helper'";
     } else 
-    {$css_class   = "class='".$this->options_->css_class." youjqtubecontainer ui-resizable-helper'";}
+    {$css_class   = "class='".$this->options_['css_class']." youjqtubecontainer ui-resizable-helper'";}
     $div_id = $this->options_['div_id'];
 //======================================================================================================================================
     //Default checks for true on default move and resize_able, but also checks for 
@@ -159,8 +157,10 @@ EOD;
 //======================================================================================================================================
     //Draggable default check, and it's other options.
 //======================================================================================================================================
+    
     if (isset($this->options_['move_able']) && $this->options_['move_able'] == true) {
       $move_able = ".draggable()";
+      $divmovehandicon = "<div class='handgrab'>👋</div>";
 
     } elseif (isset($this->options_['move_able_container']) && $this->options_['move_able_container'] == true){
       $move_able = <<<EOD
@@ -168,25 +168,29 @@ EOD;
   containment: "parent"
 })
 EOD;
+
+      $divmovehandicon = "<div class='handgrab'>👋</div>";
     }
     //Vertical movement only.
     elseif (isset($this->options_['move_able_container_y.axis']) && $this->options_['move_able_container_y.axis'] == true){
       $move_able = <<<EOD
 .draggable({
-  containment: "parent"
+  containment: "parent",
   axis: "y"
 })
 EOD;
+      $divmovehandicon = "<div class='handgrab'>👋</div>";
     }
     //Horizontal movement only.
     elseif (isset($this->options_['move_able_container_x.axis']) && $this->options_['move_able_container_x.axis'] == true){
       $move_able = <<<EOD
 .draggable({
-  containment: "parent"
+  containment: "parent",
   axis: "x"
 })
 EOD;
-    }
+      $divmovehandicon = "<div class='handgrab'>👋</div>";
+    } else {$move_able = ''; $divmovehandicon = '';}
 //======================================================================================================================================
     //Resizeable default check, and it's other options.
 //======================================================================================================================================
@@ -196,42 +200,46 @@ EOD;
 helper: "ui-resizable-helper"
 })
 EOD;
+      $divresizearrow = "<div class='arrowresize'>↘</div>";
     }
-    if (isset($this->options_['resize_able_container']) && $this->options_['resize_able_container'] == true) {
+    elseif (isset($this->options_['resize_able_container']) && $this->options_['resize_able_container'] == true) {
       $resize_able = <<<'EOD'
 .resizable({
-containment: "parent"
+containment: "parent",
 helper: "ui-resizable-helper"
 })
 EOD;
-    }
+      $divresizearrow = "<div class='arrowresize'>↘</div>";
+    } else {$resize_able = ''; $divresizearrow= '';}
     if (!empty($move_able) || !empty($resize_able)) {
         $scriptfinisher = ";";
-    }
+    } else {$scriptfinisher = "";}
 //======================================================================================================================================
 
     
 
 
     	$html_jquery = <<<EOD
-<link href="css/youjqtubecss.css" rel="stylesheet" type="text/css">
-<div id='{$div_id}' {$css_class} style='width:{$min_width}px; height:{$min_height}px'>
-<iframe id="player" type="text/html"
-src="http://www.youtube.com/embed/{$this->youtubeurlid_}?enablejsapi=1&origin={$this->origin_}"
+<div id='{$div_id}' {$css_class} style='width:{$min_width}px; min-height:{$min_height}px;'>
+<iframe id="{$div_id}" type="text/html" height="100%"
+src="http://www.youtube.com/embed/{$this->youtubeurlid_}?enablejsapi=1&origin={$this->origin_}&amp;wmode=transparent"
 frameborder="{$this->options_['frameborder']}"></iframe>
+{$divmovehandicon}
+{$divresizearrow}
+<div id='{$div_id}button' class='closeplayer'><p>X</p></div>
 </div>
 <script>
-$( document ).ready(function() {
-    ('#{$div_id}').height({$min_height})
-    ('#{$div_id}').width({$min_width})
-});
-
-
 $('#{$div_id}')
     {$move_able}
     {$resize_able}
     {$scriptfinisher}
 </script>
+<script>
+$('#{$div_id}button').click(function() {
+  $(this).closest('#{$div_id}').remove();
+});
+</script>
+
 EOD;
 
 
