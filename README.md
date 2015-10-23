@@ -90,6 +90,20 @@ php composer.phar install --no-dev
 
 We tell it --no-dev because we don't want any strange dev settings on.
 
+Now, you need to add this to your <head> section:
+```
+<link rel="stylesheet" type="text/css"
+href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css"/>
+```
+
+And this somewhere on the page. Just make sure it's BEFORE where the player will appear:
+
+```
+<script type="text/javascript"
+src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript"
+src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"></script>
+```
 ***Basic Usage***
 
 The quickest way to test and see if the package was installed correctly is this:
