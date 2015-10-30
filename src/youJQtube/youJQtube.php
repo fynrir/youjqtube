@@ -61,6 +61,7 @@ class youJQtube
      */
     public function __construct($origin, $youtubeurl = '', $options = [])
     {
+
     	//If the $youtubeurl is empty, assign a default URL for testing this package and it's full extent of
     	//resizeable and moveability.
       //die($youtubeurl);
@@ -68,12 +69,10 @@ class youJQtube
     		$youtubeurl = "https://www.youtube.com/watch?v=mcixldqDIEQ";
     		}
 
-    try {
         $youtubeid = $this->youtube_id_from_url($youtubeurl);
-      } catch (Exception $e) 
-      {print_r('YoutubeURL convertion FAILED For unknown reasons. File a bug report and what<br> you were doing at the time it happened.');}
+      
 		//If the $options array is empty, assign some default values for testing.
-		if (empty($options)) {
+		if ($options == '' || $options == null) {
 			$options = array(
         'div_id'      => 'youJStube-Default-ID',
     		'min_height'	=> 200,
@@ -83,9 +82,10 @@ class youJQtube
 		);
 		}
     //die(var_dump($options));
-
-        //Check if div_id key is null or if it contains nothing. If it happens. Kill PHP execution.
-        if (!array_key_exists('div_id', $options)) {
+    
+        //Check if div_id key is null or if it contains nothing. If it happens. Throw exception.
+        if (!isset($options['div_id'])) {
+            
             $Message = <<<EOD
 NO id key defined in &#36;options array in youJStube, failure to continue execution.<br>
 You MUST give &#36;options a div_id key with a string when using the youJStube package.<br>
@@ -94,7 +94,8 @@ As in you actually gave it a ID. Fill a bug report and describe what you were do
 
 The key you need to assign to your options array is div_id, give it something unique to seperate it from all other youtube players.
 EOD;
-            die($Message);
+          throw new \Exception($Message, 1);
+          
         }
 
 		$this->create($youtubeid, $options, $origin);
@@ -274,7 +275,11 @@ public function youtube_id_from_url($url) {
         ;
     $result = preg_match($pattern, $url, $matches);
     if (false !== $result) {
+        if (!isset($matches[1])) {
+          throw new \Exception("Error Processing YoutubeID, was not found in matches. Faulty Video ID!", 1);
+        }
         return $matches[1];
+
     }
     return false;
 }
