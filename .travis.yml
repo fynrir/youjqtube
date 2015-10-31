@@ -6,4 +6,4 @@ php:
     - hhvm
  
 script: 
-    - phpunit --bootstrap test/config.php test 
+    - phpunit --bootstrap test/config.php test
