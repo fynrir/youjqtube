@@ -258,19 +258,19 @@ class youJQtubeTest extends \PHPUnit_Framework_TestCase
 		$html = $el->getHTML();
 	}
 
-	public function testYoutubeRegexFalseCheck() {
-		$origin = "www.example.com";
-		$youtubeurl = "https://www.yout47ube.com/watch?v=OzAKZiNwzs0";
-		$options = array(
-        	'div_id'      => 'youJStube-Default-ID',
-    		'min_width'		=> 400,
-    		'resize_able_container'	=> true,
-    		'move_able'		=> true,
-		);
+	// public function testYoutubeRegexFalseCheck() {
+	// 	$origin = "www.example.com";
+	// 	$youtubeurl = "https://www.yout47ube.com/watch?v=OzAKZiNwzs0";
+	// 	$options = array(
+ //        	'div_id'      => 'youJStube-Default-ID',
+ //    		'min_width'		=> 400,
+ //    		'resize_able_container'	=> true,
+ //    		'move_able'		=> true,
+	// 	);
 
-		$el = new \fynrir\youJQtube\youJQtube($origin, $youtubeurl, $options);
-		$html = $el->getHTML();
-	}
+	// 	$el = new \fynrir\youJQtube\youJQtube($origin, $youtubeurl, $options);
+	// 	$html = $el->getHTML();
+	// }
 
 
 }
