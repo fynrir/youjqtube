@@ -85,7 +85,7 @@ class youJQtube
     
         //Check if div_id key is null or if it contains nothing. If it happens. Throw exception.
         if (!isset($options['div_id'])) {
-            
+
             $Message = <<<EOD
 NO id key defined in &#36;options array in youJStube, failure to continue execution.<br>
 You MUST give &#36;options a div_id key with a string when using the youJStube package.<br>
@@ -113,7 +113,7 @@ And letting him/her in freely.
 
 For webadministrator: Variable origin not set in class. Did you call the method correctly?
 EOD;
-            die($Message);
+            throw new \Exception($Message, 1);
         }
 
         $this->origin_ = $origin;
@@ -146,7 +146,7 @@ EOD;
     $min_width   = $this->options_['min_width'];
     $min_height  = $this->options_['min_height'];
 
-    if (empty($this->options_['css_class']) || $this->options['css_class'] == null) {
+    if (empty($this->options_['css_class']) || $this->options_['css_class'] == null) {
         $css_class = "class='youjqtubecontainer ui-resizable-helper'";
     } else 
     {$css_class   = "class='".$this->options_['css_class']." youjqtubecontainer ui-resizable-helper'";}
