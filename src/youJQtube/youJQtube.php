@@ -124,20 +124,20 @@ EOD;
     public function CheckIfForSizes() {
     // If checks for width and height to prevent possible errors. Decimals are not okay.
     //If any of them get's caught in the if checks. It will revert them to default values.
-      if (!isset($this->options_['min_width'])) {$this->options_['min_width'] = '';}
-      if (!is_int($this->options_['min_width']) || !is_numeric($this->options_['min_width'])) {
-          $this->options_['min_width'] = 640;
-      }
-      if (!isset($this->options_['min_height'])) {$this->options_['min_height'] = '';}
-      if (!is_int($this->options_['min_height']) || !is_numeric($this->options_['min_height'])) {
-          $this->options_['min_height'] = 360;
-      }
+        if (!isset($this->options_['min_width'])) {$this->options_['min_width'] = '';}
+        if (!is_int($this->options_['min_width']) || !is_numeric($this->options_['min_width'])) {
+            $this->options_['min_width'] = 640;
+        }
+        if (!isset($this->options_['min_height'])) {$this->options_['min_height'] = '';}
+        if (!is_int($this->options_['min_height']) || !is_numeric($this->options_['min_height'])) {
+            $this->options_['min_height'] = 360;
+        }
 
     } // End of Check for Sizes.
     public function CheckIfForCustomCSS() {
     //Check to see if we got some custom css class names entered into options or not. 
     //If not, peform the default text line in order to be able to use resizeable feature.
-      if (empty($this->options_['css_class']) || $this->options_['css_class'] == null) {
+        if (empty($this->options_['css_class']) || $this->options_['css_class'] == null) {
         $css_class = "class='youjqtubecontainer ui-resizable-helper'";
     } else 
     {$css_class = "class='".$this->options_['css_class']." youjqtubecontainer ui-resizable-helper'";}
