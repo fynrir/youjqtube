@@ -21,65 +21,65 @@ namespace fynrir\youJQtube;
 class youJQtube
 {
 
-	/**
-	 * Properties
-	 */
+    /**
+     * Properties
+     */
 
-	public $youtubeurlid_; //The extracted ID from the youtube url.
-	public $options_; 		//The options.
-	public $origin_;       //It's extremly important that you assign $origin_; a proper domain. OR the path to where the player will appear.
+    public $youtubeurlid_; //The extracted ID from the youtube url.
+    public $options_; 		//The options.
+    public $origin_;       //It's extremly important that you assign $origin_; a proper domain. OR the path to where the player will appear.
                     //If you use fontcontrollers/frameworks etc. Then it should be enough to get the path for the froncontroller.
-			 		//Failure to do so can lead to malicious javascript hackers taking control of the youtube media player.
-				    //Example: http://example.com or https://example.com or https://example.com/frontcontroller.php
+                        //Failure to do so can lead to malicious javascript hackers taking control of the youtube media player.
+                    //Example: http://example.com or https://example.com or https://example.com/frontcontroller.php
                     //If you have https, USE IT! NO EXCUSES!!!
 /**
-     * Constructor
-     *
-     * @param string $youtubeurl the complete URL for a youtube video
-     * @param array $options options for the div.
-     * 
-     * These options are: div_id (string), min_height (int), min_width (int), css_class (string),
-     * resize_able (boolean), and move_able (boolean).
-     * frameborder is also a possible option. But I suggest leaving it as it is already
-     * in the getHTML method near the bottom of this class.
-     *
-     * Do NOT apply a width and height yourself using CSS. The div will resize itself automatically to what options says.
-     *
-     * The div can be styled further by creating css classes.
-     * 
-     * You must give the div a ID, which is done trough options. Failure to give a ID when you call method leads to
-     * a die("NO id key defined in $options array, failure to continue execution"); 
-     * 
-     * If you call this class without defining anything (URL and options), a default "nature" movie will be displayed to 
-     * test if resize and moving works.
-     *
-     * See the accompanying README.md for Versions, and more details regarding what each method does!
-     *
-     * Code is released as public domain excluding the youtube iframe implentation and any code google owns.
-     * see UNLINCENSE.md, and also read it's exception section so we are clear on what is correct.
-     *
-     */
+                     * Constructor
+                     *
+                     * @param string $youtubeurl the complete URL for a youtube video
+                     * @param array $options options for the div.
+                     * 
+                     * These options are: div_id (string), min_height (int), min_width (int), css_class (string),
+                     * resize_able (boolean), and move_able (boolean).
+                     * frameborder is also a possible option. But I suggest leaving it as it is already
+                     * in the getHTML method near the bottom of this class.
+                     *
+                     * Do NOT apply a width and height yourself using CSS. The div will resize itself automatically to what options says.
+                     *
+                     * The div can be styled further by creating css classes.
+                     * 
+                     * You must give the div a ID, which is done trough options. Failure to give a ID when you call method leads to
+                     * a die("NO id key defined in $options array, failure to continue execution"); 
+                     * 
+                     * If you call this class without defining anything (URL and options), a default "nature" movie will be displayed to 
+                     * test if resize and moving works.
+                     *
+                     * See the accompanying README.md for Versions, and more details regarding what each method does!
+                     *
+                     * Code is released as public domain excluding the youtube iframe implentation and any code google owns.
+                     * see UNLINCENSE.md, and also read it's exception section so we are clear on what is correct.
+                     *
+                     */
     public function __construct($origin, $youtubeurl = '', $options = [])
     {
 
-    	//If the $youtubeurl is empty, assign a default URL for testing this package and it's full extent of
-    	//resizeable and moveability.
-    	if (empty($youtubeurl)) {
-    		$youtubeurl = "https://www.youtube.com/watch?v=mcixldqDIEQ";
-    		}
+        //If the $youtubeurl is empty, assign a default URL for testing this package and it's full extent of
+        //resizeable and moveability.
+        if (empty($youtubeurl)) {
+            $youtubeurl = "https://www.youtube.com/watch?v=mcixldqDIEQ";
+            }
 
         $youtubeid = $this->youtube_id_from_url($youtubeurl);
       
-		//If the $options array is empty, assign some default values for testing.
-		if ($options == '' || $options == null) {
-			$options = array(
+        //If the $options array is empty, assign some default values for testing.
+        if ($options == '' || $options == null) {
+            $options = array(
         'div_id'      => 'youJStube-Default-ID',
-    		'min_height'	=> 200,
-    		'min_width'		=> 200,
-    		'resize_able'	=> true,
-    		'move_able'		=> true,
-		);
-		}
+            'min_height'	=> 200,
+            'min_width'		=> 200,
+            'resize_able'	=> true,
+            'move_able'		=> true,
+        );
+        }
     
         //Check if div_id key is null or if it contains nothing. If it happens. Throw exception.
         if (!isset($options['div_id'])) {
@@ -92,11 +92,11 @@ As in you actually gave it a ID. Fill a bug report and describe what you were do
 
 The key you need to assign to your options array is div_id, give it something unique to seperate it from all other youtube players.
 EOD;
-          throw new \Exception($Message, 1);
+            throw new \Exception($Message, 1);
           
         }
 
-		$this->create($youtubeid, $options, $origin);
+        $this->create($youtubeid, $options, $origin);
     }
 
     public function create($youtubeid, $options, $origin) {
@@ -115,8 +115,8 @@ EOD;
         }
 
         $this->origin_ = $origin;
-    	$this->youtubeurlid_ = $youtubeid;
-    	$this->options_ = $options;
+        $this->youtubeurlid_ = $youtubeid;
+        $this->options_ = $options;
         //return $this;
     }
     //If check methods to seperate if checks into parts instead of being part of the getHTML method.
@@ -201,8 +201,7 @@ helper: "ui-resizable-helper"
 })
 EOD;
       $divresizearrow = "<div class='arrowresize'>↘</div>";
-    }
-    elseif (isset($this->options_['resize_able_container']) && $this->options_['resize_able_container'] == true) {
+    } elseif (isset($this->options_['resize_able_container']) && $this->options_['resize_able_container'] == true) {
       $resize_able = <<<'EOD'
 .resizable({
 containment: "parent",
