@@ -324,7 +324,11 @@ Had passed the Travis building using PHPUnit command line:
 
 
 
-![Passed the Travis Build! Yay!](https://travis-ci.org/fynrir/youjqtube.svg?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fynrir/youjqtube/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fynrir/youjqtube/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/fynrir/youjqtube/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/fynrir/youjqtube/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/fynrir/youjqtube/badges/build.png?b=master)](https://scrutinizer-ci.com/g/fynrir/youjqtube/build-status/master)
+
+Not to bad eh?
 
 
 
