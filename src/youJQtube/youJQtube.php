@@ -64,7 +64,6 @@ class youJQtube
 
     	//If the $youtubeurl is empty, assign a default URL for testing this package and it's full extent of
     	//resizeable and moveability.
-      //die($youtubeurl);
     	if (empty($youtubeurl)) {
     		$youtubeurl = "https://www.youtube.com/watch?v=mcixldqDIEQ";
     		}
@@ -81,7 +80,6 @@ class youJQtube
     		'move_able'		=> true,
 		);
 		}
-    //die(var_dump($options));
     
         //Check if div_id key is null or if it contains nothing. If it happens. Throw exception.
         if (!isset($options['div_id'])) {
@@ -123,21 +121,18 @@ EOD;
     }
 
     public function getHTML() {
-      //die("".var_dump($this->options_)."LOL");
+    
     //All isset checks will be done here. If they are not set. They will be given default values (true for any booleans).
-    //==============================================================================================================
-    if (!isset($this->options_['min_width'])) {$this->options_['min_width'] = 640;}
-    if (!isset($this->options_['min_height'])) {$this->options_['min_height'] = 360;}    
     //==============================================================================================================
     //Default setting for frameborder, Change 0 to 1 if you like the frameborder for some wierd reason (it is ugly).
     $this->options_['frameborder'] = '0';
     //==============================================================================================================
     // If checks for width and height to prevent possible errors. Decimals are not okay.
     //If any of them get's caught in the if checks. It will revent them to default values.
-    if (!is_int($this->options_['min_width']) || !is_numeric($this->options_['min_width'])) {
+    if (!is_int($this->options_['min_width']) || !is_numeric($this->options_['min_width']) || !isset($this->options_['min_width'])) {
         $this->options_['min_width'] = 640;
     }
-    if (!is_int($this->options_['min_height']) || !is_numeric($this->options_['min_height'])) {
+    if (!is_int($this->options_['min_height']) || !is_numeric($this->options_['min_height']) || !isset($this->options_['min_height'])) {
         $this->options_['min_height'] = 360;
     }
     

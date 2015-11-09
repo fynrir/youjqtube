@@ -319,8 +319,12 @@ Complete release of intended features.
 To do:
 I don't know. Not sure if I will be updating this package. Considering this has probably been done better, and several times already.
 
+Had passed the Travis building using PHPUnit command line:
 
 
+
+
+![Passed the Travis Build! Yay!](https://travis-ci.org/fynrir/youjqtube.svg?branch=master)
 
 
 
