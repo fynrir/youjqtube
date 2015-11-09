@@ -144,7 +144,7 @@ EOD;
     if (empty($this->options_['css_class']) || $this->options_['css_class'] == null) {
         $css_class = "class='youjqtubecontainer ui-resizable-helper'";
     } else 
-    {$css_class   = "class='".$this->options_['css_class']." youjqtubecontainer ui-resizable-helper'";}
+    {$css_class = "class='".$this->options_['css_class']." youjqtubecontainer ui-resizable-helper'";}
     $div_id = $this->options_['div_id'];
 //======================================================================================================================================
     //Default checks for true on default move and resize_able, but also checks for 
