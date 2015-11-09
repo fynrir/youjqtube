@@ -119,42 +119,34 @@ EOD;
     	$this->options_ = $options;
         //return $this;
     }
-
-    public function getHTML() {
-    
-    //All isset checks will be done here. If they are not set. They will be given default values (true for any booleans).
+    //If check methods to seperate if checks into parts instead of being part of the getHTML method.
     //==============================================================================================================
-    //Default setting for frameborder, Change 0 to 1 if you like the frameborder for some wierd reason (it is ugly).
-    $this->options_['frameborder'] = '0';
-    //==============================================================================================================
+    public function CheckIfForSizes() {
     // If checks for width and height to prevent possible errors. Decimals are not okay.
-    //If any of them get's caught in the if checks. It will revent them to default values.
-    if (!isset($this->options_['min_width'])) {$this->options_['min_width'] = '';}
-    if (!is_int($this->options_['min_width']) || !is_numeric($this->options_['min_width'])) {
-        $this->options_['min_width'] = 640;
-    }
-    if (!isset($this->options_['min_height'])) {$this->options_['min_height'] = '';}
-    if (!is_int($this->options_['min_height']) || !is_numeric($this->options_['min_height'])) {
-        $this->options_['min_height'] = 360;
-    }
-    
-    
-    //==============================================================================================================
-    $min_width   = $this->options_['min_width'];
-    $min_height  = $this->options_['min_height'];
+    //If any of them get's caught in the if checks. It will revert them to default values.
+      if (!isset($this->options_['min_width'])) {$this->options_['min_width'] = '';}
+      if (!is_int($this->options_['min_width']) || !is_numeric($this->options_['min_width'])) {
+          $this->options_['min_width'] = 640;
+      }
+      if (!isset($this->options_['min_height'])) {$this->options_['min_height'] = '';}
+      if (!is_int($this->options_['min_height']) || !is_numeric($this->options_['min_height'])) {
+          $this->options_['min_height'] = 360;
+      }
 
-    if (empty($this->options_['css_class']) || $this->options_['css_class'] == null) {
+    } // End of Check for Sizes.
+    public function CheckIfForCustomCSS() {
+    //Check to see if we got some custom css class names entered into options or not. 
+    //If not, peform the default text line in order to be able to use resizeable feature.
+      if (empty($this->options_['css_class']) || $this->options_['css_class'] == null) {
         $css_class = "class='youjqtubecontainer ui-resizable-helper'";
     } else 
     {$css_class = "class='".$this->options_['css_class']." youjqtubecontainer ui-resizable-helper'";}
-    $div_id = $this->options_['div_id'];
-//======================================================================================================================================
-    //Default checks for true on default move and resize_able, but also checks for 
-    //optional settings like resize_able_contain.
-    //options that use "container" default to parent element.
-//======================================================================================================================================
+    return $css_class;
+    }// End of Check for Custom CSS.
+    public function CheckIfForMoveAble() {
+    //======================================================================================================================================
     //Draggable default check, and it's other options.
-//======================================================================================================================================
+    //======================================================================================================================================
     
     if (isset($this->options_['move_able']) && $this->options_['move_able'] == true) {
       $move_able = ".draggable()";
@@ -189,9 +181,19 @@ EOD;
 EOD;
       $divmovehandicon = "<div class='handgrab'>👋</div>";
     } else {$move_able = ''; $divmovehandicon = '';}
-//======================================================================================================================================
+
+    $Array = array(
+      'moveable' => $move_able,
+      'moveableicon' => $divmovehandicon,
+      );
+
+    return $Array;
+    //==============================================================================================================
+    }//End of Moveable check method.
+    public function CheckIfForResizeable() {
+    //======================================================================================================================================
     //Resizeable default check, and it's other options.
-//======================================================================================================================================
+    //======================================================================================================================================
     if (isset($this->options_['resize_able']) && $this->options_['resize_able'] == true) {
       $resize_able = <<<'EOD'
 .resizable({
@@ -209,6 +211,50 @@ helper: "ui-resizable-helper"
 EOD;
       $divresizearrow = "<div class='arrowresize'>↘</div>";
     } else {$resize_able = ''; $divresizearrow= '';}
+
+    $Array = array(
+      'resizeable' => $resize_able,
+      'resizeableicon' => $divresizearrow,
+      );
+
+    return $Array;
+    //==============================================================================================================
+    }// End of Check Method for Resizeable
+
+    public function getHTML() {
+    //==============================================================================================================
+    //Default setting for frameborder, Change 0 to 1 if you like the frameborder for some wierd reason (it is ugly).
+    $this->options_['frameborder'] = '0';
+    //==============================================================================================================
+    //What follows now, is getting all the variables from the checks and assigning our other variables to be used in
+    //in the creation of the youJQtube player.
+    //==============================================================================================================
+    //Check size variables. And turn them to default incase user does not provide any sizes.
+    $this->CheckIfForSizes();
+    //==============================================================================================================
+    //Since we already have given the sizes to the class member properties, grab them from there. The 
+    //CheckIfForSizes will have made them default incase they were inproperly defined or not defined at all
+    $min_width   = $this->options_['min_width'];
+    $min_height  = $this->options_['min_height'];
+    //Run the method for checking custom css classes. And return the result of the check to be assigned to our
+    //$css_class variable in this getHTML method.
+    $css_class = $this->CheckIfForCustomCSS();
+    $div_id = $this->options_['div_id'];
+    //Peform moveable if check using method, and get the array returned with the options that was determined from
+    //the Check.
+    $MoveAbleArray = $this->CheckIfForMoveAble();
+    //Spread out the array to the variables used in the creation of the youJQtube player code.
+    $move_able = $MoveAbleArray['moveable'];
+    $divmovehandicon = $MoveAbleArray['moveableicon'];
+    //Peform resizeable if check using method, and get the array returned with the options that was determined from
+    //the Check.
+    $ResizeAbleArray = $this->CheckIfForResizeable();
+    //Spread out the array to the variables used in the creation of the youJQtube player code.
+    $resize_able = $ResizeAbleArray['resizeable'];
+    $divresizearrow = $ResizeAbleArray['resizeableicon'];
+    //==================================================================================================================================
+    //This if check is kept in getHTML as we want to be able to properly decide if we should finish the script or not. We do not want 
+    //the script code to be completed incase both features are not used.
     if (!empty($move_able) || !empty($resize_able)) {
         $scriptfinisher = ";";
     } else {$scriptfinisher = "";}
